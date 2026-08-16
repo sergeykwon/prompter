@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* ── 토스 디자인 토큰 ─────────────────────────────────
+   그레이 스케일은 토스가 쓰는 9단계 체계를 따른다.
+   본문은 g900, 보조 설명은 g600, 비활성은 g400.        */
+@theme {
+  --color-bg: #f2f4f6;
+  --color-surface: #ffffff;
+  --color-surface-2: #f9fafb;
+  --color-line: #e5e8eb;
+
+  --color-g900: #191f28;
+  --color-g800: #333d4b;
+  --color-g700: #4e5968;
+  --color-g600: #6b7684;
+  --color-g500: #8b95a1;
+  --color-g400: #b0b8c1;
+  --color-g300: #d1d6db;
+  --color-g200: #e5e8eb;
+  --color-g100: #f2f4f6;
+
+  --color-blue: #3182f6;
+  --color-blue-dark: #1b64da;
+  --color-blue-weak: #e8f3ff;
+  --color-red: #f04452;
+
+  /* 재생 화면 전용 — 촬영 중 흰 화면은 피사체에 반사된다 */
+  --color-stage: #000000;
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-g900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button,
+  input,
+  textarea {
+    font-family: inherit;
+  }
+}
+
+/* ── 토스식 인터랙션: 누르면 살짝 들어간다 ───────────── */
+.press {
+  transition:
+    transform 0.14s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.14s ease,
+    opacity 0.14s ease;
+}
+.press:active {
+  transform: scale(0.97);
+}
+.press-sm:active {
+  transform: scale(0.985);
+}
+
+/* ── 화면 전환 ────────────────────────────────────── */
+.step-in {
+  animation: step-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sheet-in {
+  animation: sheet-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.2s ease both;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.count-pop {
+  animation: count-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes count-pop {
+  0% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.94);
+    opacity: 0.3;
+  }
+}
+
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+.scroll-hide {
+  scrollbar-width: none;
+}
